@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 def record_user(
-    user, url, room_id, mode, interval, proxy, output, duration, use_telegram, cookies
+    user, url, room_id, mode, interval, proxy, output, duration, use_telegram, cookies, segment_time,
 ):
     from core.tiktok_recorder import TikTokRecorder
     from utils.logger_manager import logger
@@ -23,6 +23,7 @@ def record_user(
             output=output,
             duration=duration,
             use_telegram=use_telegram,
+            segment_time=segment_time
         ).run()
     except Exception as e:
         logger.error(f"{e}")
@@ -45,6 +46,7 @@ def run_recordings(args, mode, cookies):
                     args.duration,
                     args.telegram,
                     cookies,
+                    args.segment_time
                 ),
             )
             p.start()
@@ -74,6 +76,7 @@ def run_recordings(args, mode, cookies):
             args.duration,
             args.telegram,
             cookies,
+            args.segment_time
         )
 
 

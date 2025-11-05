@@ -57,7 +57,7 @@ def parse_args():
         action="store",
     )
 
-    parser.add_argument(
+    parser.add_argument( 
         "-proxy",
         dest="proxy",
         help=(
@@ -82,6 +82,20 @@ def parse_args():
         default=None,
         action="store",
     )
+
+    parser.add_argument(
+        "-segment_time",
+        dest="segment_time",
+        help=(
+            "Set the segment duration in seconds. "
+            "After each segment is recorded, the recording will automatically "
+            "start a new file. Example: -segment_time 15"
+        ),
+        type=int,
+        default=None,
+        action="store",
+    )
+
 
     parser.add_argument(
         "-telegram",
@@ -158,6 +172,11 @@ def validate_and_parse_args():
     if args.automatic_interval < 1:
         raise ArgsParseError(
             "Incorrect automatic_interval value. Must be one minute or more."
+        )
+    
+    if args.segment_time is not None and args.segment_time < 5:
+        raise ArgsParseError(
+            "segment_time must be at least 5 seconds to avoid too frequent file splitting."
         )
 
     if args.mode == "manual":

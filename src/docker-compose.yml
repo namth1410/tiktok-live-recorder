@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  tiktok_recorder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tiktok-live-recorder
+    volumes:
+      # Mount thư mục output để lưu video
+      - ./output:/app/output
+      # Mount cookies.json để xác thực
+      - ./cookies.json:/app/cookies.json
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    working_dir: /app
+    command: ["-user", "tiemcobong94", "-output", "./output", "-segment_time", "15"]
+
