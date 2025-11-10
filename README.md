@@ -139,3 +139,5 @@ This code is in no way affiliated with, authorized, maintained, sponsored or end
 
 ### Run
 python3 main.py -user tiemcobong94 -output ./output
+python3 main.py -user tiemcobong94 -output ./output -segment_time 15                                                                                                             
+python3 main.py -user user1,user2,user3 -output ./output -segment_time 15     
